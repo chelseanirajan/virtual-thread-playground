@@ -4,7 +4,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class InboundOutboundTaskDemo {
     private static final int MAX_PLATFORM = 10;
-    public static final int MAX_VIRTUAL = 10000;
+    public static final int MAX_VIRTUAL = 10;
 
     public static void main(String[] args) throws InterruptedException {
         virtualThreadDemo();
