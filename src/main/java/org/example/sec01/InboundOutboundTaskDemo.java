@@ -4,8 +4,10 @@ import java.util.concurrent.CountDownLatch;
 
 public class InboundOutboundTaskDemo {
     private static final int MAX_PLATFORM = 10;
+    public static final int MAX_VIRTUAL = 10000;
+
     public static void main(String[] args) throws InterruptedException {
-    platformThreadDemo3();
+        virtualThreadDemo();
     }
     private static void platformThreadDemo1(){
         for(int i = 0;i<MAX_PLATFORM;i++){
@@ -37,5 +39,20 @@ public class InboundOutboundTaskDemo {
             thread.start();
         }
         latch.await();
+    }
+
+    private static void virtualThreadDemo() throws InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(MAX_VIRTUAL);
+        Thread.Builder.OfVirtual virtual = Thread.ofVirtual().name("virtual", 1);
+        for(int i = 0; i< MAX_VIRTUAL; i++){
+            int finalI = i;
+            Thread thread = virtual.unstarted(() ->
+            {
+                Task.ioIntensive(finalI);
+                countDownLatch.countDown();
+            });
+            thread.start();
+        }
+        countDownLatch.await();
     }
 }
