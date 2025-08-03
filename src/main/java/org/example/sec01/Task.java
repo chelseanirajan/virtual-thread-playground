@@ -8,8 +8,9 @@ public class Task {
 
     public static void ioIntensive(int i){
         try {
-            log.info("starting I/O task {}", i);
-            Thread.sleep(10000);
+            log.info("starting I/O task {}. Thread Info: {}", i,Thread.currentThread());
+            Thread.sleep(1000);
+            log.info("ending I/O task {}. Thread Info: {}", i, Thread.currentThread());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

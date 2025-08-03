@@ -4,10 +4,11 @@ import java.util.concurrent.CountDownLatch;
 
 public class InboundOutboundTaskDemo {
     private static final int MAX_PLATFORM = 10;
-    public static final int MAX_VIRTUAL = 10;
+    public static final int MAX_VIRTUAL = 20;
 
     public static void main(String[] args) throws InterruptedException {
         virtualThreadDemo();
+//        platformThreadDemo1();
     }
     private static void platformThreadDemo1(){
         for(int i = 0;i<MAX_PLATFORM;i++){
